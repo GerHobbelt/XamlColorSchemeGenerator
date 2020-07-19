@@ -67,7 +67,7 @@
 
     <ItemGroup>
       <Reference Include="System.Web.Extensions" PrivateAssets="All" Condition="$(DefineConstants.Contains(NETCOREAPP)) == false" />
-      <PackageReference Include="System.Text.Json" Version="4.*" Condition="$(DefineConstants.Contains(NETCOREAPP))" />
+      <PackageReference Include="System.Text.Json" Version="4.7.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -77,5 +77,12 @@
       <None Update="Theme.Template.xaml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="JetBrains.Annotations" Version="2020.1.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>compile; build</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 </Project>

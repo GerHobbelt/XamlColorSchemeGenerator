@@ -26,3 +26,6 @@ _ReSharper*/
 
 # Designer
 FAML.Designer.settings
+
+# Visual Studio 2019 debugging config
+/src/Properties/launchSettings.json
