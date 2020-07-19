@@ -7,7 +7,7 @@
 
     <!-- Project properties -->
     <PropertyGroup>
-        <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
+        <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
