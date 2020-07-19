@@ -7,6 +7,7 @@ namespace XamlColorSchemeGenerator
 
     // This class has to be kept in sync with https://github.com/ControlzEx/ControlzEx/blob/develop/src/ControlzEx/Theming/ThemeGenerator.cs
     // Please do not remove unused code/properties here as it makes syncing more difficult.
+    [PublicAPI]
     public class ThemeGenerator
     {
         public static ThemeGenerator Current { get; set; }
@@ -18,7 +19,9 @@ namespace XamlColorSchemeGenerator
 
         public virtual ThemeGeneratorParameters GetParametersFromString(string input)
         {
-#if NETCOREAPP
+#if NETCOREAPP5_0
+            return System.Text.Json.JsonSerializer.Deserialize<ThemeGeneratorParameters>(input) ?? new ThemeGeneratorParameters();
+#elif NETCOREAPP
             return System.Text.Json.JsonSerializer.Deserialize<ThemeGeneratorParameters>(input);
 #else
             return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<ThemeGeneratorParameters>(input);

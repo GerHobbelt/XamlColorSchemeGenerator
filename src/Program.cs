@@ -55,6 +55,7 @@
                     try
                     {
                         var generator = new ColorSchemeGenerator();
+                        generator.verbose = verbose;
 
                         generator.GenerateColorSchemeFiles(generatorParametersFile, templateFile, outputPath);
                     }

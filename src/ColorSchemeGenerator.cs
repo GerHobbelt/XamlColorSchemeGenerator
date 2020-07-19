@@ -11,6 +11,7 @@ namespace XamlColorSchemeGenerator
     public class ColorSchemeGenerator
     {
         private const int BufferSize = 32768; // 32 Kilobytes
+        public bool verbose = false;
 
         public void GenerateColorSchemeFiles(string generatorParametersFile, string templateFile, string? outputPath = null)
         {
@@ -21,6 +22,13 @@ namespace XamlColorSchemeGenerator
             if (string.IsNullOrEmpty(outputPath))
             {
                 throw new Exception("OutputPath could not be determined.");
+            }
+
+            if (this.verbose)
+            {
+                Console.WriteLine($"parametersFile: {generatorParametersFile}");
+                Console.WriteLine($"templateFile:   {templateFile}");
+                Console.WriteLine($"outputPath:     {outputPath}");
             }
 
             Directory.CreateDirectory(outputPath);
@@ -136,6 +144,21 @@ namespace XamlColorSchemeGenerator
             var fileHasToBeWritten = File.Exists(themeFile) == false
                                      || ReadAllTextShared(themeFile) != themeTempFileContent;
 
+            if (this.verbose)
+            {
+                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine($"templateDirectory:      {templateDirectory}");
+                Console.WriteLine($"themeName:              {themeName}");
+                Console.WriteLine($"themeDisplayName:       {themeDisplayName}");
+                Console.WriteLine($"baseColorScheme:        {baseColorScheme}");
+                Console.WriteLine($"colorScheme:            {colorScheme}");
+                Console.WriteLine($"alternativeColorScheme: {alternativeColorScheme}");
+                Console.WriteLine($"isHighContrast:         {isHighContrast}");
+                Console.WriteLine($"themeFilename:          {themeFilename}");
+                Console.WriteLine($"themeFile:              {themeFile}");
+                Console.WriteLine($"fileHasToBeWritten:     {fileHasToBeWritten}");
+            }
+
             if (fileHasToBeWritten)
             {
                 using (var sw = new StreamWriter(themeFile, false, Encoding.UTF8, BufferSize))
@@ -143,11 +166,25 @@ namespace XamlColorSchemeGenerator
                     sw.Write(themeTempFileContent);
                 }
 
-                Trace.WriteLine($"Resource Dictionary saved to \"{themeFile}\".");
+                if (this.verbose)
+                {
+                    Console.WriteLine($"  --> Resource Dictionary saved to \"{themeFile}\".");
+                }
+                else
+                {
+                    Trace.WriteLine($"Resource Dictionary saved to \"{themeFile}\".");
+                }
             }
             else
             {
-                Trace.WriteLine("New Resource Dictionary did not differ from existing file. No new file written.");
+                if (this.verbose)
+                {
+                    Console.WriteLine("  --> New Resource Dictionary did not differ from existing file. No new file written.");
+                }
+                else
+                {
+                    Trace.WriteLine("New Resource Dictionary did not differ from existing file. No new file written.");
+                }
             }
         }
     }
