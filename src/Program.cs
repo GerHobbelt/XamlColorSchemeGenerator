@@ -21,6 +21,7 @@
 
             var nologo = args.Any(x => x.Equals("-nologo", StringComparison.OrdinalIgnoreCase));
             var verbose = args.Any(x => x.Equals("-v", StringComparison.OrdinalIgnoreCase));
+            var forceWrite = args.Any(x => x.Equals("-f", StringComparison.OrdinalIgnoreCase));
             var indexForGeneratorParametersFile = Array.IndexOf(args, "-g") + 1;
             var indexForTemplateFile = Array.IndexOf(args, "-t") + 1;
             var indexForOutputPath = Array.IndexOf(args, "-o") + 1;
@@ -56,6 +57,7 @@
                     {
                         var generator = new ColorSchemeGenerator();
                         generator.verbose = verbose;
+                        generator.forceFileWrite = forceWrite;
 
                         generator.GenerateColorSchemeFiles(generatorParametersFile, templateFile, outputPath);
                     }

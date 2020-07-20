@@ -11,7 +11,9 @@ namespace XamlColorSchemeGenerator
     public class ColorSchemeGenerator
     {
         private const int BufferSize = 32768; // 32 Kilobytes
+
         public bool verbose = false;
+        public bool forceFileWrite = false;
 
         public void GenerateColorSchemeFiles(string generatorParametersFile, string templateFile, string? outputPath = null)
         {
@@ -142,7 +144,8 @@ namespace XamlColorSchemeGenerator
             Trace.WriteLine($"Checking \"{themeFile}\"...");
 
             var fileHasToBeWritten = File.Exists(themeFile) == false
-                                     || ReadAllTextShared(themeFile) != themeTempFileContent;
+                                     || ReadAllTextShared(themeFile) != themeTempFileContent
+                                     || this.forceFileWrite;
 
             if (this.verbose)
             {
