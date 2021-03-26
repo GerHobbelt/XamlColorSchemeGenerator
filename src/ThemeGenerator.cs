@@ -22,7 +22,7 @@ namespace XamlColorSchemeGenerator
 #if NETCOREAPP5_0
             return System.Text.Json.JsonSerializer.Deserialize<ThemeGeneratorParameters>(input) ?? new ThemeGeneratorParameters();
 #elif NETCOREAPP
-            return System.Text.Json.JsonSerializer.Deserialize<ThemeGeneratorParameters>(input);
+            return System.Text.Json.JsonSerializer.Deserialize<ThemeGeneratorParameters>(input) ?? new ThemeGeneratorParameters();
 #else
             return new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<ThemeGeneratorParameters>(input);
 #endif
